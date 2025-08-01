@@ -1,0 +1,32 @@
+body {
+  background: black;
+  color: lime;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+  padding-top: 50px;
+}
+
+#julie img {
+  width: 200px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px lime;
+}
+
+button {
+  background-color: lime;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+#chatbox {
+  margin-top: 30px;
+  font-size: 1em;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
