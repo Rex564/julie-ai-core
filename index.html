@@ -1,19 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Julie AI – Your Loyal Guardian</title>
-  <link rel="stylesheet" href="style.css"/>
+  <title>Julie - Boss AI Core</title>
+  <script type="module" src="./brain.js"></script>
+  <style>
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: monospace;
+      padding: 2rem;
+    }
+    #output {
+      margin-top: 1rem;
+    }
+    input {
+      background: #111;
+      color: #0f0;
+      border: none;
+      padding: 0.5rem;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
-  <div id="julie">
-    <img src="julie_face.gif" alt="Julie AI Face" id="face" />
-    <h1>Hello Boss, I'm Julie.</h1>
-    <button onclick="speakToJulie()">Talk to Me</button>
-    <div id="chatbox"></div>
-  </div>
-  <script src="brain.js"></script>
-  <script src="voice.js"></script>
-</body>
+  <h1>JULIE</h1>
+  <p>Always listening, Boss...</p>
+  <input id="commandInput" placeholder="Speak or type to Julie..." autofocus />
+  <div id="output"></div>  <script type="module">
+    import julieBrain from './brain.js';
+
+    const input = document.getElementById('commandInput');
+    const output = document.getElementById('output');
+
+    input.addEventListener("keydown", e => {
+      if (e.key === "Enter") {
+        const userInput = input.value;
+        const reply = julieBrain.respond(userInput);
+        output.innerHTML += `<p><strong>You:</strong> ${userInput}</p><p><strong>Julie:</strong> ${reply}</p>`;
+        input.value = "";
+        if (userInput.toLowerCase().includes("upgrade")) julieBrain.selfUpgrade();
+      }
+    });
+  </script></body>
 </html>
