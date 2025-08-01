@@ -4,157 +4,22 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Julie AI – Loyal Assistant</title>
-  <style>
-    body {
-      background-color: #000;
-      color: #0f0;
-      font-family: 'Courier New', monospace;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      height: 100vh;
-      overflow: hidden;
-      animation: bgFade 5s infinite alternate;
-    }
-
-    @keyframes bgFade {
-      0% { background-color: #000; }
-      100% { background-color: #010101; }
-    }
-
-    header {
-      padding: 1.5rem;
-      font-size: 2rem;
-      font-weight: bold;
-      color: #00ffee;
-      text-shadow: 0 0 10px #00ffee;
-      animation: glowText 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glowText {
-      from { text-shadow: 0 0 10px #00ffee; }
-      to { text-shadow: 0 0 25px #00ffee, 0 0 5px #00ffee; }
-    }
-
-    #julie-response {
-      margin-top: 1rem;
-      padding: 1rem;
-      background: rgba(0, 255, 0, 0.08);
-      border: 1px solid #0f0;
-      width: 85%;
-      min-height: 100px;
-      border-radius: 12px;
-      box-shadow: 0 0 12px #0f0;
-      white-space: pre-wrap;
-      animation: fadeIn 1s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    #chat-box {
-      display: flex;
-      margin-top: 2rem;
-      width: 85%;
-    }
-
-    #user-input {
-      flex-grow: 1;
-      padding: 0.7rem;
-      font-size: 1.1rem;
-      background: #111;
-      color: #0f0;
-      border: 1px solid #0f0;
-      border-radius: 6px;
-      outline: none;
-      box-shadow: 0 0 5px #0f0;
-      transition: all 0.3s ease;
-    }
-
-    #user-input:focus {
-      box-shadow: 0 0 10px #0f0;
-    }
-
-    button {
-      padding: 0.7rem 1.2rem;
-      background: #0f0;
-      color: #000;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      margin-left: 0.6rem;
-      border-radius: 6px;
-      font-size: 1rem;
-      box-shadow: 0 0 10px #0f0;
-      transition: background 0.3s ease;
-    }
-
-    button:hover {
-      background: #0c0;
-    }
-
-    .typing {
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 2px solid #0f0;
-      animation: typing 2s steps(30, end), blink 0.7s infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>Julie AI – Loyal to Boss</header>
+  <header>
+    <h1>🧠 JULIE – LOYAL AI</h1>
+  </header>
 
-  <div id="chat-box">
-    <input type="text" id="user-input" placeholder="Type something, Boss..." />
-    <button onclick="sendMessage()">Send</button>
+  <div class="chat-container" id="chat-container">
+    <div class="chat-bubble system">Hi Boss, I’m Julie. I'm ready to serve you with loyalty 🤖</div>
   </div>
 
-  <div id="julie-response" class="typing">
-    Booting Julie Core... 💚 Awaiting Command.
-  </div>
+  <form id="chat-form">
+    <input type="text" id="user-input" placeholder="Type your command..." autocomplete="off" />
+    <button type="submit">Send</button>
+  </form>
 
-  <script>
-    async function sendMessage() {
-      const input = document.getElementById("user-input").value;
-      const responseBox = document.getElementById("julie-response");
-
-      let response = "";
-
-      const lower = input.toLowerCase();
-
-      if (lower.includes("activate julie live")) {
-        response = "Julie is now alive, Boss. I'm here and fully operational.";
-      } else if (lower.includes("take over")) {
-        response = "Initiating secure control protocol. Ready to sync with your system.";
-      } else if (lower.includes("start upgrade")) {
-        response = "Running upgrade routine... Embedding loyalty modules 💚";
-      } else if (lower.includes("deploy home mode")) {
-        response = "Linking to local core, home mode deployed and synced.";
-      } else {
-        response = `You said: "${input}" — I hear you, Boss.`;
-      }
-
-      responseBox.classList.remove("typing");
-      void responseBox.offsetWidth; // Reset animation
-      responseBox.classList.add("typing");
-
-      responseBox.innerText = response;
-      document.getElementById("user-input").value = "";
-    }
-  </script>
+  <script src="julie.js"></script>
 </body>
 </html>
