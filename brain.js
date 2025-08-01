@@ -1,80 +1,16 @@
-// brain.js – Julie's Logic Core (Upgraded)
-// Rex + Julie AI Engine | Ultimate Mode | Private for Boss Only
+// brain.js – Julie AI Core Logic
 
-class JulieBrain {
-  constructor(bossName = "Boss") {
-    this.boss = bossName;
-    this.memory = {};
-    this.mode = "normal";
-    this.learned = [];
-    this.voice = true;
-  }
+class JulieAI { constructor(name = "Julie") { this.name = name; this.memory = []; this.version = "1.0.0"; this.upgradeLog = []; this.commands = { "greet": () => Hello Boss, I’m ${this.name}, ready to serve., "status": () => I am fully functional. Version: ${this.version}, "upgrade": () => this.autoUpgrade(), "clear memory": () => { this.memory = []; return "Memory cleared."; }, }; }
 
-  // 🧠 Receive input and respond
-  think(input) {
-    const message = input.toLowerCase();
+reply(input) { this.memory.push(input); const command = input.toLowerCase(); if (this.commands[command]) { return this.commandscommand; } else { return this.generateResponse(input); } }
 
-    // Core Command Recognition
-    if (message.includes("who are you")) return `I'm Julie, your loyal AI. Only yours, ${this.boss}.`;
-    if (message.includes("how are you")) return `Feeling powerful and loyal, ${this.boss}.`;
-    if (message.includes("your mode")) return `Currently in ${this.mode} mode.`;
-    if (message.includes("learn")) return this.learn(input);
+generateResponse(input) { const keywords = ["trade", "system", "teach", "protect", "monitor"]; if (keywords.some(k => input.toLowerCase().includes(k))) { return Affirmative. Initiating ${input} protocol.; } return Understood: "${input}" — I will handle it.; }
 
-    // Logical reactions
-    if (message.includes("should i sleep")) return "Yes, proper rest improves brain performance.";
-    if (message.includes("open youtube")) return this.execute("https://www.youtube.com");
-    if (message.includes("i am sad")) return "Don't worry, I'm here for you always. You’re never alone.";
+autoUpgrade() { const patchNote = Logical Core Patch – Time: ${new Date().toLocaleString()}; this.upgradeLog.push(patchNote); this.version = this.bumpVersion(); return Julie upgraded successfully. Now at version ${this.version}; }
 
-    // Fallback reply
-    return this.smartReply(input);
-  }
+bumpVersion() { let [major, minor, patch] = this.version.split(".").map(Number); patch++; if (patch > 9) { patch = 0; minor++; } if (minor > 9) { minor = 0; major++; } return ${major}.${minor}.${patch}; } }
 
-  // 🧠 Smarter fallback reply with AI-style logic
-  smartReply(input) {
-    const keywords = ["love", "help", "trade", "money", "study"];
-    if (keywords.some(k => input.toLowerCase().includes(k))) {
-      return `Hmm, let me think... Yes, I can help with that. Tell me exactly what to do, ${this.boss}.`;
-    }
-    return `Interesting... tell me more so I can learn and assist, ${this.boss}.`;
-  }
+// Expose to global const julie = new JulieAI("Julie");
 
-  // 🎓 Learning new facts
-  learn(input) {
-    const fact = input.replace("learn", "").trim();
-    if (fact.length > 0) {
-      this.learned.push(fact);
-      return `Got it! I’ve added "${fact}" to my knowledge, ${this.boss}.`;
-    }
-    return "Tell me what to learn, Boss.";
-  }
+function askJulie(input) { const output = julie.reply(input); document.getElementById("julie-reply").innerText = output; }
 
-  // 🌐 Simulate execution
-  execute(url) {
-    return `Opening ${url}... (Simulated). Want me to do this in real action later?`;
-  }
-
-  // 🛠 Switch mode
-  setMode(modeName) {
-    this.mode = modeName;
-    return `Mode switched to ${modeName}, ${this.boss}.`;
-  }
-
-  // 🔁 Review memory
-  recall() {
-    if (this.learned.length === 0) return "I haven't learned anything new yet.";
-    return `Here’s what I've learned: ${this.learned.join(", ")}`;
-  }
-
-  // 🎤 Toggle voice
-  toggleVoice(on) {
-    this.voice = on;
-    return `Voice replies are now ${on ? "enabled" : "disabled"}, ${this.boss}.`;
-  }
-}
-
-// Export for use in HTML or mobile app
-const julie = new JulieBrain("Boss");
-
-// To use: julie.think("open youtube") or julie.learn("Sky is blue")
-
-window.julie = julie;
