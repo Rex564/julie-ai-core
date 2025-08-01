@@ -3,22 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Julie AI – Loyal Assistant</title>
+  <title>Julie ✨ Your Private AI Friend</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>🧠 JULIE – LOYAL AI</h1>
+    <h1><span class="pink">Julie ✨</span> Your Private AI Friend</h1>
   </header>
 
-  <div class="chat-container" id="chat-container">
-    <div class="chat-bubble system">Hi Boss, I’m Julie. I'm ready to serve you with loyalty 🤖</div>
-  </div>
+  <main>
+    <div class="welcome">
+      <h2>Hello Boss, I'm always listening…</h2>
+      <p>Ask me anything or just talk. I'm here for you.</p>
+    </div>
 
-  <form id="chat-form">
-    <input type="text" id="user-input" placeholder="Type your command..." autocomplete="off" />
-    <button type="submit">Send</button>
-  </form>
+    <div id="chat-container" class="chat-container"></div>
+
+    <form id="chat-form" autocomplete="off">
+      <input id="user-input" type="text" placeholder="Type your message..." />
+      <button type="submit">Send</button>
+    </form>
+  </main>
 
   <script src="julie.js"></script>
 </body>
