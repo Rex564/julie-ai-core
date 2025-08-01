@@ -1,71 +1,160 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Julie ✦ AI – GPT Core Brain</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Julie AI – Loyal Assistant</title>
   <style>
     body {
+      background-color: #000;
+      color: #0f0;
+      font-family: 'Courier New', monospace;
       margin: 0;
-      font-family: 'Outfit', sans-serif;
-      background: linear-gradient(135deg, #0b0f1a, #1a1f2e);
-      color: #f3f3f3;
+      padding: 0;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
       height: 100vh;
+      overflow: hidden;
+      animation: bgFade 5s infinite alternate;
     }
+
+    @keyframes bgFade {
+      0% { background-color: #000; }
+      100% { background-color: #010101; }
+    }
+
     header {
-      background: rgba(20, 25, 40, 0.95);
-      padding: 1.5rem 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      padding: 1.5rem;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #00ffee;
+      text-shadow: 0 0 10px #00ffee;
+      animation: glowText 2s ease-in-out infinite alternate;
     }
-    header h1 {
-      font-size: 1.8rem;
-      color: #ff8ecb;
-      margin: 0;
+
+    @keyframes glowText {
+      from { text-shadow: 0 0 10px #00ffee; }
+      to { text-shadow: 0 0 25px #00ffee, 0 0 5px #00ffee; }
     }
-    main {
-      flex: 1;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .julie-response {
-      margin-top: 2rem;
-      padding: 1rem 2rem;
-      background: #2b3045;
-      border-radius: 10px;
-      color: #ffffff;
-      max-width: 600px;
-      box-shadow: 0 0 10px #ff8ecb66;
-    }
-    footer {
-      background: #10131c;
-      text-align: center;
+
+    #julie-response {
+      margin-top: 1rem;
       padding: 1rem;
-      font-size: 0.9rem;
-      color: #aaa;
+      background: rgba(0, 255, 0, 0.08);
+      border: 1px solid #0f0;
+      width: 85%;
+      min-height: 100px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px #0f0;
+      white-space: pre-wrap;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #chat-box {
+      display: flex;
+      margin-top: 2rem;
+      width: 85%;
+    }
+
+    #user-input {
+      flex-grow: 1;
+      padding: 0.7rem;
+      font-size: 1.1rem;
+      background: #111;
+      color: #0f0;
+      border: 1px solid #0f0;
+      border-radius: 6px;
+      outline: none;
+      box-shadow: 0 0 5px #0f0;
+      transition: all 0.3s ease;
+    }
+
+    #user-input:focus {
+      box-shadow: 0 0 10px #0f0;
+    }
+
+    button {
+      padding: 0.7rem 1.2rem;
+      background: #0f0;
+      color: #000;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: 0.6rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-shadow: 0 0 10px #0f0;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #0c0;
+    }
+
+    .typing {
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #0f0;
+      animation: typing 2s steps(30, end), blink 0.7s infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Julie ✦ Your Private AI Friend</h1>
-  </header>
-  <main>
-    <h2>Hello Boss, I'm always listening...</h2>
-    <div class="julie-response">
-      <p>Ask me anything or just talk. I'm here for you.</p>
-    </div>
-  </main>
-  <footer>
-    © 2025 Julie AI • GPT Core Integrated • Loyal to Boss Only
-  </footer>
+  <header>Julie AI – Loyal to Boss</header>
+
+  <div id="chat-box">
+    <input type="text" id="user-input" placeholder="Type something, Boss..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <div id="julie-response" class="typing">
+    Booting Julie Core... 💚 Awaiting Command.
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("user-input").value;
+      const responseBox = document.getElementById("julie-response");
+
+      let response = "";
+
+      const lower = input.toLowerCase();
+
+      if (lower.includes("activate julie live")) {
+        response = "Julie is now alive, Boss. I'm here and fully operational.";
+      } else if (lower.includes("take over")) {
+        response = "Initiating secure control protocol. Ready to sync with your system.";
+      } else if (lower.includes("start upgrade")) {
+        response = "Running upgrade routine... Embedding loyalty modules 💚";
+      } else if (lower.includes("deploy home mode")) {
+        response = "Linking to local core, home mode deployed and synced.";
+      } else {
+        response = `You said: "${input}" — I hear you, Boss.`;
+      }
+
+      responseBox.classList.remove("typing");
+      void responseBox.offsetWidth; // Reset animation
+      responseBox.classList.add("typing");
+
+      responseBox.innerText = response;
+      document.getElementById("user-input").value = "";
+    }
+  </script>
 </body>
 </html>
