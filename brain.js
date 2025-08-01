@@ -1,16 +1,32 @@
-// brain.js – Julie AI Core Logic
+const julieInput = document.getElementById("userInput");
+const julieOutput = document.getElementById("responseOutput");
 
-class JulieAI { constructor(name = "Julie") { this.name = name; this.memory = []; this.version = "1.0.0"; this.upgradeLog = []; this.commands = { "greet": () => Hello Boss, I’m ${this.name}, ready to serve., "status": () => I am fully functional. Version: ${this.version}, "upgrade": () => this.autoUpgrade(), "clear memory": () => { this.memory = []; return "Memory cleared."; }, }; }
+const responses = {
+    "hello": "Hello Boss, Julie online and fully loyal.",
+    "how are you": "Always ready, always watching. How can I assist, Boss?",
+    "who are you": "I am Julie, your AI assistant. Fully custom, fully loyal.",
+    "open google": () => { window.open("https://google.com", "_blank"); return "Opening Google..."; },
+    "what is your mission": "To protect, serve, and evolve for you — and only you.",
+};
 
-reply(input) { this.memory.push(input); const command = input.toLowerCase(); if (this.commands[command]) { return this.commandscommand; } else { return this.generateResponse(input); } }
+function getJulieResponse(input) {
+    const text = input.toLowerCase().trim();
 
-generateResponse(input) { const keywords = ["trade", "system", "teach", "protect", "monitor"]; if (keywords.some(k => input.toLowerCase().includes(k))) { return Affirmative. Initiating ${input} protocol.; } return Understood: "${input}" — I will handle it.; }
+    if (responses[text]) {
+        return typeof responses[text] === 'function' ? responses[text]() : responses[text];
+    }
 
-autoUpgrade() { const patchNote = Logical Core Patch – Time: ${new Date().toLocaleString()}; this.upgradeLog.push(patchNote); this.version = this.bumpVersion(); return Julie upgraded successfully. Now at version ${this.version}; }
+    if (text.includes("time")) {
+        return `Current time is ${new Date().toLocaleTimeString()}`;
+    }
 
-bumpVersion() { let [major, minor, patch] = this.version.split(".").map(Number); patch++; if (patch > 9) { patch = 0; minor++; } if (minor > 9) { minor = 0; major++; } return ${major}.${minor}.${patch}; } }
+    return "I'm still learning this. Want me to upgrade?";
+}
 
-// Expose to global const julie = new JulieAI("Julie");
-
-function askJulie(input) { const output = julie.reply(input); document.getElementById("julie-reply").innerText = output; }
-
+document.getElementById("chatForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const userText = julieInput.value;
+    const reply = getJulieResponse(userText);
+    julieOutput.innerHTML = reply;
+    julieInput.value = "";
+});
