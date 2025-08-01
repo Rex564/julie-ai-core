@@ -1,45 +1,71 @@
 <!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Julie - Boss AI Core</title>
-  <script type="module" src="./brain.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Julie ✦ AI – GPT Core Brain</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap">
   <style>
     body {
-      background: #000;
-      color: #0f0;
-      font-family: monospace;
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #0b0f1a, #1a1f2e);
+      color: #f3f3f3;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background: rgba(20, 25, 40, 0.95);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    header h1 {
+      font-size: 1.8rem;
+      color: #ff8ecb;
+      margin: 0;
+    }
+    main {
+      flex: 1;
       padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
     }
-    #output {
-      margin-top: 1rem;
+    .julie-response {
+      margin-top: 2rem;
+      padding: 1rem 2rem;
+      background: #2b3045;
+      border-radius: 10px;
+      color: #ffffff;
+      max-width: 600px;
+      box-shadow: 0 0 10px #ff8ecb66;
     }
-    input {
-      background: #111;
-      color: #0f0;
-      border: none;
-      padding: 0.5rem;
-      width: 100%;
+    footer {
+      background: #10131c;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <h1>JULIE</h1>
-  <p>Always listening, Boss...</p>
-  <input id="commandInput" placeholder="Speak or type to Julie..." autofocus />
-  <div id="output"></div>  <script type="module">
-    import julieBrain from './brain.js';
-
-    const input = document.getElementById('commandInput');
-    const output = document.getElementById('output');
-
-    input.addEventListener("keydown", e => {
-      if (e.key === "Enter") {
-        const userInput = input.value;
-        const reply = julieBrain.respond(userInput);
-        output.innerHTML += `<p><strong>You:</strong> ${userInput}</p><p><strong>Julie:</strong> ${reply}</p>`;
-        input.value = "";
-        if (userInput.toLowerCase().includes("upgrade")) julieBrain.selfUpgrade();
-      }
-    });
-  </script></body>
+  <header>
+    <h1>Julie ✦ Your Private AI Friend</h1>
+  </header>
+  <main>
+    <h2>Hello Boss, I'm always listening...</h2>
+    <div class="julie-response">
+      <p>Ask me anything or just talk. I'm here for you.</p>
+    </div>
+  </main>
+  <footer>
+    © 2025 Julie AI • GPT Core Integrated • Loyal to Boss Only
+  </footer>
+</body>
 </html>
