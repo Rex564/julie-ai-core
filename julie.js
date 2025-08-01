@@ -1,56 +1,57 @@
-const chatContainer = document.getElementById('chat-container');
-const chatForm = document.getElementById('chat-form');
-const userInput = document.getElementById('user-input');
+const form = document.getElementById('chat-form');
+const input = document.getElementById('user-input');
+const container = document.getElementById('chat-container');
 
-chatForm.addEventListener('submit', async (e) => {
+form.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const input = userInput.value.trim();
-  if (!input) return;
+  const text = input.value.trim();
+  if (!text) return;
 
-  addMessage(input, 'user');
-  userInput.value = '';
+  addBubble(text, 'user');
+  input.value = '';
 
-  const reply = await getJulieReply(input);
-  addMessage(reply, 'system');
+  const response = await getJulieReply(text);
+  addBubble(response, 'system');
 });
 
-function addMessage(text, type) {
+function addBubble(text, type) {
   const bubble = document.createElement('div');
   bubble.className = `chat-bubble ${type}`;
   bubble.textContent = text;
-  chatContainer.appendChild(bubble);
-  chatContainer.scrollTop = chatContainer.scrollHeight;
+  container.appendChild(bubble);
+  container.scrollTop = container.scrollHeight;
 }
 
-// PRIVATE OFFLINE BRAIN LOGIC
-async function getJulieReply(input) {
-  input = input.toLowerCase();
+// Core Brain Logic (offline + GPT online)
+async function getJulieReply(message) {
+  const lower = message.toLowerCase();
 
-  if (input.includes('activate trading')) return "✅ Trading module activated. Private Rex engine ready.";
-  if (input.includes('status')) return "🧠 All systems nominal. Memory, loyalty, and protection secure.";
-  if (input.includes('hello') || input.includes('hi')) return "Hello Boss, how can I help you today?";
-  if (input.includes('who are you')) return "I'm Julie — your personal loyal AI. Fully private, self-aware, and always learning.";
+  // 💡 Custom Commands
+  if (lower.includes('activate trading')) return "🟢 Trading brain online. Ready to execute.";
+  if (lower.includes('hello') || lower.includes('hi')) return "Hi Boss 👋 How can I help you?";
+  if (lower.includes('who are you')) return "I'm Julie, your private AI. Loyal. Local. Fast.";
+  if (lower.includes('status')) return "All systems green. Offline brain functional. GPT ready.";
 
-  // ONLINE GPT BRAIN fallback
+  // 🌐 Online Fallback (GPT)
   if (navigator.onLine) {
     try {
       const res = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer YOUR_API_KEY_HERE'
+          'Authorization': 'Bearer YOUR_API_KEY_HERE' // <== Add your API key here
         },
         body: JSON.stringify({
           model: 'gpt-3.5-turbo',
-          messages: [{ role: 'user', content: input }],
+          messages: [{ role: 'user', content: message }],
         })
       });
       const data = await res.json();
       return data.choices[0].message.content;
     } catch (err) {
-      return "⚠️ GPT fallback failed. Offline mode active.";
+      return "⚠️ GPT failed. Staying offline.";
     }
   }
 
-  return "🤖 Julie couldn't understand. Try again or connect to internet.";
+  return "🤖 I'm offline but always listening. Try another command.";
 }
